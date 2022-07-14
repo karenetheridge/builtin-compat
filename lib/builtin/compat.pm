@@ -5,6 +5,8 @@ use warnings;
 our $VERSION = '0.001000';
 $VERSION =~ tr/_//d;
 
+use namespace::clean ();
+
 sub true ();
 sub false ();
 sub is_bool ($);
@@ -161,8 +163,8 @@ sub import {
     *{$caller.'::'.$import} = \&$import;
   }
 
-  require namespace::clean;
   namespace::clean->import(-cleanee => $caller, @_);
+  return;
 }
 
 if (!defined &builtin::import) {

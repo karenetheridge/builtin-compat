@@ -18,6 +18,7 @@ my %META = (
     },
     runtime => {
       requires => {
+        'namespace::clean' => 0,
       },
     },
     develop   => {
