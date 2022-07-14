@@ -19,6 +19,7 @@ BEGIN {
     ceil
     floor
     trim
+    indexed
   );
 
 }

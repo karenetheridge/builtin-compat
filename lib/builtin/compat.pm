@@ -21,6 +21,7 @@ sub created_as_number ($);
 sub ceil ($);
 sub floor ($);
 sub trim ($);
+sub indexed;
 
 BEGIN { eval { require builtin } }
 
@@ -99,6 +100,12 @@ sub trim ($) {
   my $string = shift;
   s/\A\s+//, s/\s+\z// for $string;
   return $string;
+}
+END_CODE
+  indexed   => <<'END_CODE',
+sub indexed {
+  my $i = 0;
+  map +($i++, $_), @_;
 }
 END_CODE
 );
@@ -208,6 +215,7 @@ builtin::compat - Provide builtin functions for older perl versions
     ceil
     floor
     trim
+    indexed
   );
 
 =head1 DESCRIPTION
