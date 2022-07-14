@@ -54,6 +54,7 @@ END_CODE
 sub created_as_number ($) {
   my $value = shift;
 
+  no warnings 'numeric';
   return true
     if (
       defined $value
