@@ -140,6 +140,7 @@ die $e
 
 my %EXPORT_OK = map +($_ => 1), @EXPORT_OK;
 
+our $NO_DISABLE_WARNINGS;
 sub import {
   my $class = shift;
 
@@ -166,12 +167,19 @@ sub import {
     *{$caller.'::'.$import} = \&$import;
   }
 
+  unless ($NO_DISABLE_WARNINGS) {
+    local $@;
+    eval { warnings->unimport('experimental::builtin') };
+  }
   namespace::clean->import(-cleanee => $caller, @_);
   return;
 }
 
 if (!defined &builtin::import) {
-  *builtin::import = \&import;
+  *builtin::import = sub {
+    local $NO_DISABLE_WARNINGS = 1;
+    &import;
+  };
 }
 
 $INC{'builtin.pm'} ||= __FILE__;
