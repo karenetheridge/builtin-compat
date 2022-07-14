@@ -143,7 +143,10 @@ my %EXPORT_OK = map +($_ => 1), @EXPORT_OK;
 sub import {
   my $class = shift;
 
-  my $caller = caller;;
+  # search for caller that is being compiled. can't just use caller directly,
+  # beause it may not be the same level as builtin would use for its lexical
+  # exports
+  my $caller;
   my $level = 0;
   while (my @caller = caller(++$level)) {
     if ($caller[3] =~ /\A(.*)::BEGIN\z/s) {
