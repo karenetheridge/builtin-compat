@@ -28,7 +28,7 @@ BEGIN { eval { require builtin } }
 my @fb = (
   true      => 'sub true () { !!1 }',
   false     => 'sub false () { !!0 }',
-  is_bool => <<'END_CODE',
+  is_bool   => sprintf(qq{#line %s "%s"\n}, __LINE__+1, __FILE__).<<'END_CODE',
 use Scalar::Util ();
 sub is_bool ($) {
   my $value = shift;
@@ -50,7 +50,7 @@ END_CODE
   blessed   => \'Scalar::Util::blessed',
   refaddr   => \'Scalar::Util::refaddr',
   reftype   => \'Scalar::Util::reftype',
-  created_as_number => <<'END_CODE',
+  created_as_number => sprintf(qq{#line %s "%s"\n}, __LINE__+1, __FILE__).<<'END_CODE',
 sub created_as_number ($) {
   my $value = shift;
 
@@ -69,7 +69,7 @@ sub created_as_number ($) {
 }
 
 END_CODE
-  created_as_string => <<'END_CODE',
+  created_as_string => sprintf(qq{#line %s "%s"\n}, __LINE__+1, __FILE__).<<'END_CODE',
 sub created_as_string ($) {
   my $value = shift;
 
@@ -84,26 +84,26 @@ sub created_as_string ($) {
   return false;
 }
 END_CODE
-  ceil      => <<'END_CODE',
+  ceil      => sprintf(qq{#line %s "%s"\n}, __LINE__+1, __FILE__).<<'END_CODE',
 use POSIX ();
 sub ceil ($) {
   goto &POSIX::ceil;
 }
 END_CODE
-  floor     => <<'END_CODE',
+  floor     => sprintf(qq{#line %s "%s"\n}, __LINE__+1, __FILE__).<<'END_CODE',
 use POSIX ();
 sub floor ($) {
   goto &POSIX::floor;
 }
 END_CODE
-  trim      => <<'END_CODE',
+  trim      => sprintf(qq{#line %s "%s"\n}, __LINE__+1, __FILE__).<<'END_CODE',
 sub trim {
   my $string = shift;
   s/\A\s+//, s/\s+\z// for $string;
   return $string;
 }
 END_CODE
-  indexed   => <<'END_CODE',
+  indexed   => sprintf(qq{#line %s "%s"\n}, __LINE__+1, __FILE__).<<'END_CODE',
 sub indexed {
   my $i = 0;
   map +($i++, $_), @_;
