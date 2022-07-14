@@ -185,11 +185,27 @@ builtin::compat - A new module
 
 =head1 SYNOPSIS
 
-  use builtin::compat;
+  use builtin::compat qw(
+    true
+    false
+    is_bool
+    weaken
+    unweaken
+    is_weak
+    blessed
+    refaddr
+    reftype
+    created_as_string
+    created_as_number
+    ceil
+    floor
+    trim
+  );
 
 =head1 DESCRIPTION
 
-A new module.
+Provides L<builtin> subs for perl versions that do not include the L<builtin>
+module.
 
 =head1 AUTHOR
 
