@@ -20,7 +20,7 @@ sub created_as_string ($);
 sub created_as_number ($);
 sub ceil ($);
 sub floor ($);
-sub trim ($);
+sub trim;
 sub indexed;
 
 BEGIN { eval { require builtin } }
@@ -96,7 +96,7 @@ sub floor ($) {
 }
 END_CODE
   trim      => <<'END_CODE',
-sub trim ($) {
+sub trim {
   my $string = shift;
   s/\A\s+//, s/\s+\z// for $string;
   return $string;
