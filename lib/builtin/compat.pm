@@ -223,6 +223,95 @@ builtin::compat - Provide builtin functions for older perl versions
 Provides L<builtin> functions for perl versions that do not include the
 L<builtin> module.
 
+No functions are exported by default.
+
+This module does its best to behave similar to L<builtin>, which creates its
+exported functions as lexicals. The functions will be created in the currently
+compiling scope, not the immediate caller of C<< builtin::compat->import >>.
+The functions will also be removed at the end of the compilation scope using
+L<namespace::clean>.
+
+The L<builtin> functions will be used directly when they are available.
+
+=head1 FUNCTIONS
+
+=over 4
+
+=item true
+
+See L<builtin/true>.
+
+=item false
+
+See L<builtin/false>.
+
+=item is_bool
+
+See L<builtin/is_bool>.
+
+Prior to perl 5.36, it was not possible to track boolean values fully
+accurately. This function will not be perfectly accurate on earlier perl
+versions.
+
+=item weaken
+
+See L<builtin/weaken>.
+
+=item unweaken
+
+See L<builtin/unweaken>.
+
+=item is_weak
+
+See L<builtin/is_weak>.
+
+=item blessed
+
+See L<builtin/blessed>.
+
+=item refaddr
+
+See L<builtin/refaddr>.
+
+=item reftype
+
+See L<builtin/reftype>.
+
+=item created_as_string
+
+See L<builtin/created_as_string>.
+
+Prior to perl 5.36, it was not possible to check if a scalar value was created
+as a number or as a string fully accurately. This function will not be entirely
+accurate before then, but should be as accurate as is possible on these perl
+versions. In particular, a string like "12345" that has been used as a number
+will cause C<create_as_string> to return false and C<created_as_number> to
+return true.
+
+=item created_as_number
+
+See L<builtin/created_as_number>.
+
+Has the same caveats as C<created_as_string>.
+
+=item ceil
+
+See L<builtin/ceil>.
+
+=item floor
+
+See L<builtin/floor>.
+
+=item trim
+
+See L<builtin/trim>.
+
+=item indexed
+
+See L<builtin/indexed>.
+
+=back
+
 =head1 AUTHOR
 
 haarg - Graham Knop (cpan:HAARG) <haarg@haarg.org>
