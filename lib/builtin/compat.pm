@@ -189,7 +189,7 @@ __END__
 
 =head1 NAME
 
-builtin::compat - A new module
+builtin::compat - Provide builtin functions for older perl versions
 
 =head1 SYNOPSIS
 
@@ -212,8 +212,8 @@ builtin::compat - A new module
 
 =head1 DESCRIPTION
 
-Provides L<builtin> subs for perl versions that do not include the L<builtin>
-module.
+Provides L<builtin> functions for perl versions that do not include the
+L<builtin> module.
 
 =head1 AUTHOR
 
