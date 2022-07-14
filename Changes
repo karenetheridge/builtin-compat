@@ -1,5 +1,6 @@
 Revision history for builtin-compat
 
+  - fix prototype of trim to match current builtin::trim
   - additional tests
   - improve documentation
   - add indexed function
