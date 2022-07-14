@@ -29,7 +29,8 @@ BEGIN {
   BEGIN {
     for my $import (@imports) {
       no strict 'refs';
-      ok defined &$import, "$import imported from builtin::compat";
+      my $ref = eval "\\&$import";
+      ok defined &$ref, "$import imported from builtin::compat";
     }
   }
 }
@@ -55,7 +56,8 @@ BEGIN {
   BEGIN {
     for my $import (@imports) {
       no strict 'refs';
-      ok defined &$import, "$import imported from builtin";
+      my $ref = eval "\\&$import";
+      ok defined &$ref, "$import imported from builtin";
     }
   }
 }
