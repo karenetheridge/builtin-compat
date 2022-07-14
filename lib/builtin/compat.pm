@@ -32,16 +32,17 @@ my @fb = (
 use Scalar::Util ();
 sub is_bool ($) {
   my $value = shift;
-  return false
-    if !defined $value || length ref $value || !Scalar::Util::isdual($value);
 
-  return true
-    if $value && $value == 1 && $value eq '1';
-
-  return true
-    if !$value && $value == 0 && $value eq '';
-
-  return false;
+  return (
+    defined $value
+    && !length ref $value
+    && Scalar::Util::isdual($value)
+    && (
+      $value
+        ? ( $value == 1 && $value eq '1' )
+        : ( $value == 0 && $value eq ''  )
+    )
+  );
 }
 END_CODE
   weaken    => \'Scalar::Util::weaken',
@@ -55,17 +56,14 @@ sub created_as_number ($) {
   my $value = shift;
 
   no warnings 'numeric';
-  return true
-    if (
-      defined $value
-      && !length ref $value
-      && !is_bool($value)
-      && !utf8::is_utf8($value)
-      && length( (my $dummy = '') & $value )
-      && 0 + $value eq $value
-    );
-
-  return false;
+  return (
+    defined $value
+    && !length ref $value
+    && !is_bool($value)
+    && !utf8::is_utf8($value)
+    && length( (my $dummy = '') & $value )
+    && 0 + $value eq $value
+  );
 }
 
 END_CODE
@@ -73,15 +71,12 @@ END_CODE
 sub created_as_string ($) {
   my $value = shift;
 
-  return true
-    if (
-      defined $value
-      && !length ref $value
-      && !is_bool($value)
-      && !created_as_number($value)
-    );
-
-  return false;
+  return (
+    defined $value
+    && !length ref $value
+    && !is_bool($value)
+    && !created_as_number($value)
+  );
 }
 END_CODE
   ceil      => sprintf(qq{#line %s "%s"\n}, __LINE__+1, __FILE__).<<'END_CODE',
