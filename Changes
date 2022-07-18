@@ -1,5 +1,7 @@
 Revision history for builtin-compat
 
+  - add prereq on Scalar::Util 1.36 for unweaken function
+
 0.001001 - 2022-07-14
   - fix prototype of trim to match current builtin::trim
   - additional tests
