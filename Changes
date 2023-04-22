@@ -1,5 +1,6 @@
 Revision history for builtin-compat
 
+0.002000 - 2023-04-22
   - add is_tainted function
   - ensure the expermental::builtin warnings category always exists
 
