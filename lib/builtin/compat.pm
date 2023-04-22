@@ -24,6 +24,14 @@ sub trim;
 sub indexed;
 
 BEGIN { eval { require builtin } }
+{
+  package #hide
+    experimental::builtin;
+  if(!$warnings::Offsets{+__PACKAGE__}) {
+    require warnings::register;
+    warnings::register->import;
+  }
+}
 
 my @fb = (
   true      => 'sub true () { !!1 }',
