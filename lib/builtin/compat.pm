@@ -112,6 +112,7 @@ sub indexed {
   map +($i++, $_), @_;
 }
 END_CODE
+  is_tainted => \'Scalar::Util::tainted',
 );
 
 my @EXPORT_OK;
