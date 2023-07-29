@@ -139,7 +139,9 @@ while (my ($sub, $fb) = splice @fb, 0, 2) {
     $code .= $fb . "\n";
   }
 
-  *{'builtin::'.$sub} = \&$sub;
+  if (!defined &{'builtin::'.$sub}) {
+    *{'builtin::'.$sub} = \&$sub;
+  }
 }
 
 my $e;
