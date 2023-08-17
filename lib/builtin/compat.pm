@@ -21,7 +21,7 @@ sub created_as_number ($);
 sub ceil ($);
 sub floor ($);
 sub trim ($);
-sub indexed;
+sub indexed (@);
 
 BEGIN { eval { require builtin } }
 {
@@ -107,7 +107,7 @@ sub trim ($) {
 }
 END_CODE
   indexed   => sprintf(qq{#line %s "%s"\n}, __LINE__+1, __FILE__).<<'END_CODE',
-sub indexed {
+sub indexed (@) {
   my $i = 0;
   map +($i++, $_), @_;
 }
@@ -124,6 +124,7 @@ no strict 'refs';
 while (my ($sub, $fb) = splice @fb, 0, 2) {
   push @EXPORT_OK, $sub;
   if (defined &{'builtin::'.$sub}) {
+    no warnings 'prototype';
     *$sub = \&{'builtin::'.$sub};
     next;
   }
