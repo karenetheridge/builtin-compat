@@ -8,6 +8,8 @@ BEGIN {
     true
     false
     is_bool
+    inf
+    nan
     weaken
     unweaken
     is_weak
@@ -91,6 +93,10 @@ ok !is_bool(''), '!is_bool("")';
   }
   is $ref, undef, 'weaken';
 }
+
+cmp_ok nan, '!=', nan, 'nan is nan';
+
+cmp_ok inf/2, '==', inf, 'inf is inf';
 
 {
   my $ref;

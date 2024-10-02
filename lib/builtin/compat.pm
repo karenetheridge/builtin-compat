@@ -10,6 +10,8 @@ use namespace::clean ();
 sub true ();
 sub false ();
 sub is_bool ($);
+sub inf ();
+sub nan ();
 sub weaken ($);
 sub unweaken ($);
 sub is_weak ($);
@@ -53,6 +55,8 @@ sub is_bool ($) {
   );
 }
 END_CODE
+  inf       => 'sub inf () { 9**9**9**9 }',
+  nan       => 'sub nan () { 9**9**9**9*0 }',
   weaken    => \'Scalar::Util::weaken',
   unweaken  => \'Scalar::Util::unweaken',
   is_weak   => \'Scalar::Util::isweak',
@@ -260,6 +264,14 @@ See L<builtin/is_bool>.
 Prior to perl 5.36, it was not possible to track boolean values fully
 accurately. This function will not be perfectly accurate on earlier perl
 versions.
+
+=item inf
+
+See L<builtin/inf>.
+
+=item nan
+
+See L<builtin/nan>.
 
 =item weaken
 
