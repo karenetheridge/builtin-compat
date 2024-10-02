@@ -18,6 +18,7 @@ BEGIN {
     reftype
     created_as_string
     created_as_number
+    stringify
     ceil
     floor
     trim
@@ -143,6 +144,10 @@ ok created_as_number(0), 'created_as_number(0)';
 ok !created_as_number(true), '!created_as_number(true)';
 ok created_as_number($number), 'created_as_number($number_used_as_string)';
 ok !created_as_number($string), 'created_as_number($string_used_as_number)';
+
+my $string_ref = stringify({});
+ok !ref $string_ref, 'stringify produces a string';
+like $string_ref, qr/^HASH/, 'stringify produces correct string';
 
 is ceil(1.2), 2, 'ceil(1.2)';
 is floor(1.2), 1, 'floor(1.2)';

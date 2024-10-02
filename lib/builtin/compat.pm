@@ -20,6 +20,7 @@ sub refaddr ($);
 sub reftype ($);
 sub created_as_string ($);
 sub created_as_number ($);
+sub stringify ($);
 sub ceil ($);
 sub floor ($);
 sub trim ($);
@@ -89,6 +90,11 @@ sub created_as_string ($) {
     && !is_bool($value)
     && !created_as_number($value)
   );
+}
+END_CODE
+  stringify => sprintf(qq{#line %s "%s"\n}, __LINE__+1, __FILE__).<<'END_CODE',
+sub stringify ($) {
+  "$_[0]"
 }
 END_CODE
   ceil      => sprintf(qq{#line %s "%s"\n}, __LINE__+1, __FILE__).<<'END_CODE',
@@ -313,6 +319,10 @@ return true.
 See L<builtin/created_as_number>.
 
 Has the same caveats as C<created_as_string>.
+
+=item stringify
+
+See L<builtin/stringify>.
 
 =item ceil
 
