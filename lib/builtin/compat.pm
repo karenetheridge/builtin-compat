@@ -25,6 +25,7 @@ sub ceil ($);
 sub floor ($);
 sub trim ($);
 sub indexed (@);
+sub load_module ($);
 
 BEGIN { eval { require builtin } }
 {
@@ -123,6 +124,34 @@ sub indexed (@) {
 }
 END_CODE
   is_tainted => \'Scalar::Util::tainted',
+  load_module => ( ( "$]" < 5.011 && !("$]" >= 5.009004 && "$]" < 5.010001) )
+    ? sprintf(qq{#line %s "%s"\n}, __LINE__+1, __FILE__).<<'END_CODE'
+sub builtin::compat::load_module::__GUARD__::DESTROY {
+  delete $INC{$_[0]->[0]} if @{$_[0]};
+}
+
+sub load_module ($) {
+  my $module = $_[0];
+  (my $file = $module) =~ s{::}{/}g;
+  $file .= ".pm";
+
+  local %^H;
+  my $guard = bless [ $file ], 'builtin::compat::load_module::__GUARD__';
+  my $result = CORE::require($file);
+  pop @$guard;
+
+  return $result;
+}
+END_CODE
+    : sprintf(qq{#line %s "%s"\n}, __LINE__+1, __FILE__).<<'END_CODE'
+sub load_module ($) {
+  my $module = $_[0];
+  (my $file = $module) =~ s{::}{/}g;
+  $file .= ".pm";
+  return scalar CORE::require($file);
+}
+END_CODE
+  ),
 );
 
 my @EXPORT_OK;
@@ -339,6 +368,10 @@ See L<builtin/trim>.
 =item indexed
 
 See L<builtin/indexed>.
+
+=item load_module
+
+See L<builtin/load_module>.
 
 =back
 
