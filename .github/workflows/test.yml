@@ -159,10 +159,12 @@ jobs:
           sudo: false
           install: ${{ steps.prereqs.outputs.prereqs }}
       - name: Run the xt tests
+        if: hashFiles('xt/*.t')
         run: prove -l xt
         env:
           AUTHOR_TESTING: 1
       - name: Run the xt/author tests
+        if: hashFiles('xt/author/**/*.t')
         run: prove -lr xt/author
         env:
           AUTHOR_TESTING: 1
