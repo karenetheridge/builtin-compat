@@ -2,7 +2,7 @@ package builtin::compat;
 use strict;
 use warnings;
 
-our $VERSION = '0.003001';
+our $VERSION = '0.003002';
 $VERSION =~ tr/_//d;
 
 use namespace::clean ();
