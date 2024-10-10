@@ -1,5 +1,7 @@
 Revision history for builtin-compat
 
+  - fix compatibility with builtin::Backport
+
 0.003001 - 2024-10-09
   - fix return value of load_module to match builtin behavior
 
