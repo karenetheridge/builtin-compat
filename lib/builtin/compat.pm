@@ -181,15 +181,15 @@ while (my ($sub, $fb) = splice @fb, 0, 2) {
   }
 
   if (!defined &{'builtin::'.$sub}) {
-    if ($] < '5.038000') {
-      my $subref = \&$sub;
+    my $subref = \&$sub;
+    if ($] < '5.038000' && (ref $fb || prototype($subref) eq '')) {
       require Scalar::Util;
       my $wrap = sub { goto &$subref };
       Scalar::Util::set_prototype(\&$wrap, prototype($subref));
       *{'builtin::'.$sub} = $wrap;
     }
     else {
-      *{'builtin::'.$sub} = \&$sub;
+      *{'builtin::'.$sub} = $subref;
     }
   }
 }
