@@ -261,6 +261,8 @@ builtin::compat - Provide builtin functions for older perl versions
     true
     false
     is_bool
+    inf
+    nan
     weaken
     unweaken
     is_weak
@@ -269,10 +271,12 @@ builtin::compat - Provide builtin functions for older perl versions
     reftype
     created_as_string
     created_as_number
+    stringify
     ceil
     floor
     trim
     indexed
+    load_module
   );
 
 =head1 DESCRIPTION
