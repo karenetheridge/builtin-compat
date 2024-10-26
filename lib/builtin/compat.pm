@@ -273,6 +273,7 @@ builtin::compat - Provide builtin functions for older perl versions
     reftype
     created_as_string
     created_as_number
+    stringify
     ceil
     floor
     trim

@@ -1,5 +1,7 @@
 Revision history for builtin-compat
 
+  - added missing functions to synopsis
+
 0.003002 - 2024-10-10
   - fix compatibility with builtin::Backport
 
