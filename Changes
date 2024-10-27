@@ -1,5 +1,6 @@
 Revision history for builtin-compat
 
+  - fix importing with no arguments deleting existing functions
   - added missing functions to synopsis
 
 0.003002 - 2024-10-10
