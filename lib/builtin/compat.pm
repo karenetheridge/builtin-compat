@@ -207,6 +207,8 @@ my %EXPORT_OK = map +($_ => 1), @EXPORT_OK;
 our $NO_DISABLE_WARNINGS;
 sub import {
   my $class = shift;
+  return
+    unless @_;
 
   # search for caller that is being compiled. can't just use caller directly,
   # beause it may not be the same level as builtin would use for its lexical
